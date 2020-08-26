@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/> 
+<title>Random numbers</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.flot.js"></script>
+<script type="text/javascript" src="randnums.js">
+</script>
+</head>
+<body onload="main()">
+<h1>Исследование программных генераторов<br/> случайных чисел</h1>
+<hr/>
+Генерация равномерно-распределенных чисел на интервале [A,B]<br/>
+Начальные значения<br/>
+A: <span id="divA"></span><br/>
+B: <span id="divB"></span><br/>
+(Длина интервала) L=B-A: <span id="divL"></span><br/>
+Интервал: <span id="interval"></span><br/>
+Число подинтервалов:<br/>
+TINT: <span id="divTINT"></span><br/>
+Длина подинтервала:<br/>
+STEP=L/TINT: <span id="divSTEP"></span><br/>
+<hr/>
+Число генерируемых случайных чисел:<br/>
+N: <span id="divN"></span><br/>
+
+<hr/>
+<input type="button" value="Начать" style="width:100pt" onclick="startAndShow()"/>
+<div id="mytab"><div>
+</body>
+</html>
