@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+  android:orientation="vertical" > 
+              
+<RadioGroup
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RadioButton
+        android:id="@+id/radio1"  
+        android:textSize="10sp"      
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio1">
+     </RadioButton>
+    
+    
+    <RadioButton 
+        android:id="@+id/radio2"
+        android:textSize="10sp"       
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio2">
+    </RadioButton>
+    
+    <RadioButton 
+        android:id="@+id/radio3"
+        android:textSize="10sp"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio3"></RadioButton>
+
+    <RadioButton 
+        android:id="@+id/radio4"
+        android:textSize="10sp"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio4"></RadioButton>
+
+    <RadioButton 
+        android:id="@+id/radio5"
+        android:textSize="10sp"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radio5"
+         android:checked="true">
+    </RadioButton>
+    
+ </RadioGroup>
+ 
+       <TextView
+          android:id="@+id/textf"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+
+
+           <TextView 
+            android:layout_width="fill_parent"
+            android:id="@+id/Records"
+            android:text="@+id/TextView"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:background="@drawable/f5"
+            android:layout_height="150sp"/>
+                   
+
+        <TextView
+          android:id="@+id/fio"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/fio"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+       
+         <EditText 
+           android:id="@+id/Edit"
+           android:textSize="14sp"
+           android:layout_height="wrap_content"
+           android:layout_width="300dp"
+           android:inputType="textPersonName"/>
+         
+
+         <TextView
+          android:id="@+id/sait"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/sait"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+       
+         <EditText 
+           android:id="@+id/Sait"
+           android:textSize="14sp"
+           android:layout_height="wrap_content"
+           android:layout_width="200dp"
+           android:inputType="textEmailAddress"/>
+         
+        <TextView
+          android:id="@+id/email"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/email"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+
+         <EditText
+             android:id="@+id/editemail"
+             android:layout_width="200dp"
+             android:layout_height="wrap_content"
+             android:textSize="14sp"
+             android:inputType="textEmailAddress"/>
+
+         
+        <TextView
+          android:id="@+id/PhoneN"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/PhoneN"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+
+         <EditText
+             android:id="@+id/numphone"
+             android:layout_width="160dp"
+             android:layout_height="wrap_content"
+             android:textSize="14sp"
+             android:inputType="phone"/>
+         
+         <TextView
+          android:id="@+id/number"
+          android:textSize="10sp"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:text="@string/number"
+          android:textStyle="bold"
+          android:paddingLeft="5dp"/>
+         
+          <EditText
+             android:id="@+id/num"
+             android:layout_width="40dp"
+             android:layout_height="wrap_content"
+             android:textSize="14sp"
+             android:inputType="number"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+             
+             <Button  
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:id="@+id/Back"
+            android:text="@string/Back"
+            android:layout_alignParentLeft="true"
+        	android:layout_centerVertical="true" />
+   
+          
+          <Button  
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textSize="10sp"
+            android:id="@+id/OK"
+            android:text="@string/OK"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+          <Button
+              android:id="@+id/Insert"
+              android:layout_width="wrap_content"
+              android:layout_height="35dp"
+              android:layout_alignParentTop="true"
+              android:layout_marginRight="16dp"
+              android:layout_toLeftOf="@+id/OK"
+              android:text="@string/Insert"
+              android:textSize="10sp" />
+
+          <Button
+              android:id="@+id/Del"
+              android:layout_width="wrap_content"
+              android:layout_height="35dp"
+              android:layout_alignParentTop="true"
+              android:layout_toLeftOf="@+id/Insert"
+              android:text="@string/Delete"
+              android:textSize="10sp" />
+          
+        </RelativeLayout>
+
+
+        </LinearLayout> 
+  

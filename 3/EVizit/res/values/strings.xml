@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ElectViz</string>
+    <string name="menu_settings">Settings</string>
+    <string name="button1">Создать визитку</string>
+    <string name="button2">О компании</string>
+    <string name="SpecialText">Электронные визитки</string>
+    <string name="radio1">Фон 1</string>
+    <string name="radio2">Фон 2</string>
+    <string name="radio3">Фон 3</string>
+    <string name="radio4">Фон 4</string>
+    <string name="radio5">Фон 5</string>
+    <string name="fio">Фамилия Имя Отчество</string>
+    <string name="OK">Отправить</string>
+    <string name="Back">Назад</string>
+    <string name="email">E-Mail</string>
+    <string name="PhoneN">Телефон</string>
+    <string name="sait">Сайт</string>
+    <string name="Insert">Посмотреть</string>
+    <string name="Delete">Стереть</string>
+    <string name="number">Количество визиток</string>
+    <string name="tcom">     Вы можете заказать визитку у нас с помощью этого приложения. Для этого введите свои данные, выберите     фон и сколько визиток Вы хотите напечатать. После отправки сообщения нам на почту, наш оператор свяжется с Вами в течение дня и предложит действующие в данный момент расценки и материалы для изготовления.</string>
+     
+     
+     
+    
+
+
+
+
+</resources>
