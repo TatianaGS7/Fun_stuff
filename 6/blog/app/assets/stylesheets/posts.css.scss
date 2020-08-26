@@ -1,0 +1,40 @@
+#d1 /*заголовок*/ {
+height: 180px;
+background-image: url('gort13.jpg');
+border-radius: 10px;
+}
+
+#d2 /*меню*/ {
+margin-top: 10px;
+height: 300px;
+width: 200px;
+border-radius: 25px;
+background-color: #CCFF33;
+float: left;
+}
+
+#d3 /*содержание*/ {
+margin-top: 10px;
+margin-left: 200px;
+padding: 20px;
+border-radius: 25px;
+background-color: #9999CC;
+}
+
+#d4 {color: #990033;}
+
+#d5 {
+padding: 20px;
+color: #990066;
+background-color: #FFFF99;	
+}
+	
+
+#cont {
+text-indent: 20px;
+}
+
+#all {
+min-height: 100px;
+}
+

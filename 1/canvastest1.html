@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvastest1</title>
+	<style>
+		canvas {
+			border: 2px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="600" height="600"></canvas>
+	<script>
+		var canvas = document.getElementById('myCanvas');
+		var context = canvas.getContext('2d');
+		
+		var circles = [];
+		var circlesCount = 3; //число круго
+		
+		var randomNumber = function(min, max) {
+			return Math.floor(Math.random() * (max-min) + min);
+		};
+		
+		var initCircles = function() {
+			for (var i = 1; i <= circlesCount; i++) {
+				var r = randomNumber(10, 50); //размеры рандомно от 10 до 50
+				circles.push({
+					'r': r,
+					'color': 'black',
+					'x': randomNumber(r + 15, canvas.width - r - 15),
+					'dx': randomNumber(0, 10),
+					'y': randomNumber(r + 15, canvas.height - r - 15),
+					'dy': randomNumber(0, 10),
+					'paint': function() {
+						context.beginPath();
+						context.lineWidth = 4;
+						context.strokeStyle = this.color;
+						context.arc(
+							this.x, this.y, this.r, 
+							0, 2 * Math.PI, false
+						);
+						context.stroke();
+					},
+					'move': function() {
+						if (this.x < this.r || this.x > (canvas.width - this.r)) {
+							this.dx = -this.dx;
+						}
+						if (this.y < this.r || this.y > (canvas.height - this.r)) {
+							this.dy = -this.dy;
+						}
+						this.x += this.dx;
+						this.y += this.dy;
+					}, 
+
+					'check': function() {
+							for (var i =0; i < circles.length; i++) {
+								if (circles[i] != this) {
+									var c = circles[i];
+									if (
+										Math.pow(this.x - c.x, 2)
+										+ Math.pow(this.y - c.y, 2)
+										< Math.pow(this.r + c.r, 2) 
+										) {
+										this.dx = -this.dx;
+										this.dy = -this.dy;
+										c.dx = -c.dx;
+										c.dy = -c.dy;
+									      }
+								                        }
+							                                        }
+						                     }
+				});
+			}
+		};
+	
+		initCircles();
+		setInterval(function() {
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < circles.length; i++) {
+				circles[i].move();
+				circles[i].paint();
+				circles[i].check();
+			}
+		}, 30); //скорость
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+	<title>Game</title>
+  <style>
+    canvas {border: 2px solid black;}
+  </style>
+</head>
+
+<body>
+	<link rel="stylesheet" type="text/css" href="G.css">
+
+  <canvas id='Can' width="700" height="500"></canvas>
+<div id="och"></div>
+
+    <script>
+
+        //создаем переменные
+        var canvas = document.getElementById("Can");
+		var context = canvas.getContext('2d');
+		var circles = [];  // массив, в котором будут хранится шарики
+		var circlesCount = 26; //количество шаров 
+	    var och = document.getElementById("och");
+        var ochki = 0;
+
+		
+
+
+  function Vector(x,y)  //объект, который хранит координаты шара
+   {
+	this.x = x;
+	this.y = y;
+   };
+
+      Vector.prototype.length= function(){ //матем. функция, обраратыв столкновение Шара с объектами
+	  	return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
+        };
+
+ 	 Vector.prototype.dot= function(v){ //скалярное произведение
+		return this.x*v.x+this.y*v.y;
+    	};
+
+ 	 Vector.prototype.sum= function(v){  //двигаем Шар по вектору v
+	    this.x=this.x +v.x //& v.x
+	    this.y= this.y + v.y //& v.y
+	    return this;
+      };
+
+  	 Vector.prototype.multiply= function(s){  //создает новый вектор, координаты кот = коорд старого * на число 
+       s=0.2;
+   		return  new Vector(this.x*s,this.y*s);  
+     };
+
+  	 Vector.prototype.normalize= function(){ //делит координату на длину вектора
+   	     var l= this.length();
+    	this.x=this.x /l;
+    	this.y=this.y/l;
+    	return this;
+     };
+
+
+
+
+  function Ball(x, y, vx, vy) {   // свойства шаров
+			this.p = new Vector(x, y);  // пложение на координатной сетке
+			this.v = new Vector(vx, vy);  //движение
+			this.r = 20; //радиус
+			this.m = 10; // коэффициент отклонения шара после столкновения чем больше, тем меньше угол
+			}
+
+		Ball.prototype.draw = function(col) {
+			context.beginPath();
+			context.lineWidth = 5;
+			context.strokeStyle = '#fc9'; //контур
+            context.fillStyle = col;  //цвет
+			context.arc(this.p.x, this.p.y, this.r, 0, 2 * Math.PI, false);  //рисуем окружность
+			context.fill();
+			context.stroke();			
+		}
+
+		Ball.prototype.move = function() { 
+			this.p = this.p.sum(this.v);
+		}
+
+		Ball.prototype.bounce = function() { //ударение о стенки
+			if (this.p.x < this.r || this.p.x > canvas.width - this.r) { //влево-вправо
+				this.v.x = -this.v.x;
+			}
+			if (this.p.y < this.r || this.p.y > canvas.height - this.r) { //вверх
+				this.v.y = -this.v.y;
+			}
+
+		}
+
+		Ball.prototype.collide = function(obj) { //сталкивания с объектами (шариками)
+			var dn = new Vector(this.p.x - obj.p.x, this.p.y - obj.p.y); //просчитывается растояние между ядрами по каждой координате
+			var sr = this.r + obj.r; //прибавляется радиус
+			var dx = dn.length(); // узнаем фактическое расстояние
+			if (dx > sr) {
+				return 0; // Столкновений нет
+				}			
+			dn.normalize();  
+            var dt = new Vector(dn.y, -dn.x);
+            obj.v = dt.multiply(obj.v.dot(dt)); //определяем новое направление движения
+           return 1; //возращаем 1 если было столкновение
+            }
+
+
+        // рисуем шарики
+        circles.push(new Ball(canvas.width/2,canvas.height -(canvas.height/5), 0.1, -0.5)); //Шар
+        for (var i=1, j=1, hh=1; i <= circlesCount; i++,j++) { //матрица шариков, которое в кол-ве circlesCount штук
+        	if ((canvas.width - (50*j+1)) < 0){
+  				hh++; j=1;} // каждый раз смещая на 50 пикселей влево и 50 пискелей вниз, если близки к границе поля,j считает шарики по горизонтале столбца, h по вертикале строки
+  				circles.push(new Ball(canvas.width - (50*j),50*hh,0,0));
+        }
+
+
+
+
+function Raketka(w,h) {  
+			this.w = w;
+			this.h = h;
+			this.rx = canvas.width/2 - w;
+			this.ry = canvas.height-h-3;
+		}
+
+		Raketka.prototype.draw = function() {
+			//context.beginPath();
+		    context.lineWidth = 6;
+            context.fillStyle = "red";  //цвет
+            context.strokeStyle = "black"; //цвет линии
+			context.strokeRect(this.rx,this.ry,this.w,this.h);
+			context.fillRect(this.rx,this.ry,this.w,this.h)
+			context.stroke();
+		   // context.fill();						
+		};
+
+
+
+
+		var rak = new Raketka(100, 10); //размер ракетки
+	   canvas.addEventListener('mousemove',function(event) {
+	   if((rak.rx > 0 || rak.rx < event.offsetX - rak.w/2) && 
+	   (rak.rx + 100 < canvas.width || rak.rx > event.offsetX - rak.w/2)){
+	   	rak.rx = event.offsetX - rak.w/2;}},false); // движение мышки
+
+  //общее 
+
+     // игра окончена
+        Ball.prototype.gameover = function(){
+        	if (this.p.y > canvas.height - this.r){//достигли нижней границы
+        		this.p.y = canvas.height - canvas.height/8; //новая высота для Шара
+        		this.p.x = rak.rx + rak.w/5; //новое положение по горизонали для Шара
+        		this.v.x = 0; //скорость Шара 0
+        		this.v.y = 0;
+        		canvas.addEventListener('click', function(event) {
+        			circles[0].v.x = 0;
+        			circles[0].v.y = -1;
+        		});
+        	}
+        }
+
+		
+        // Ударение о платформу
+        Ball.prototype.collideRaketka = function(obj){
+        	if (this.p.y + this.r +10 > canvas.height - obj.h && this.p.x > obj.rx && this.p.x <(obj.rx + obj.w)){ //проверяем, соответствует ли координаты Шара области платформы
+        		this.v.y = -this.v.y;
+        		return 1; // Столкновенин с платформой
+        	}
+        	else return 0;
+        }
+
+		setInterval(function() {
+			context.clearRect(0, 0, canvas.width, canvas.height); //удаляет пиксели назаданном фоне	
+
+			och.innerHTML = "Счет: " + ochki;		
+
+			for (var i = 1; i < circles.length; i++) { //циклически проходим все созданные объекты и проверяем,было ли столкновение
+			if(circles[i].collide(circles[0])){  // если было столкновение с не левым ядром
+                circles[i].p.y = -25 * i;     //выкидываем другой шар за границы поля (удаляем)
+                ochki = ochki +1;
+            }
+            circles[i].draw('#cc0'); // бездвижные шарики заливаем цветом
+            circles[0].move(); //двигаем шарик
+            }
+            circles[0].draw('green'); //главный  Шар
+            circles[0].bounce(); //столкнулись со стенкой
+        	circles[0].collideRaketka(rak); //попали ли на ракетку
+       	    circles[0].gameover();//если ядро не попало в ракетку
+        	rak.draw(); 			
+			}, 10);			
+	 
+
+
+		</script>
+		
+	</body>
+</html>

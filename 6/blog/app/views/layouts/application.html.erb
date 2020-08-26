@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blog</title>
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+<div id="d1"></div>
+<div id="d2">  
+   <ul>   	
+     <li><a href="..">Главная</a></li>
+     <li><a href="/posts">Новости</a></li>
+   </ul>   
+</div>
+
+<div id="d3"><%= yield %></div>
+
+</body>
+</html>

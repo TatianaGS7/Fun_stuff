@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Ball</title>
+  <meta charset="utf-8">
+
+ </head> 
+ <body>
+ <canvas id="Balls" width="600" height="600"></canvas>
+ <script>
+ var canvas = document.getElementById('Balls');
+		var context = canvas.getContext('2d');
+		
+		var circles = [];
+		var circlesCount = 1;
+		
+		var randomNumber = function(min, max) {
+			return Math.floor(Math.random() * (max - min) + min);
+		};
+
+function Vector(x, y) {
+   this.x = x;
+   this.y = y;
+};
+
+Vector.prototype.length = function() {
+	return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
+};
+
+Vector.prototype.multiply = function(s) {
+    return new Vector(this.x*s,this.y*s);
+};
+
+Vector.prototype.sum = function(v) {
+	this.x = this.x + v.x;
+	this.y = this.y + v.y;
+	return this;
+};
+
+Vector.prototype.normalize = function() {
+var z = this.length();
+this.x = this.x/z;
+this.y = this.y/z;
+return this;
+};
+
+Vector.prototype.dot = function(v){
+this.x*v.x + this.y*v.y;
+return this.x*v.x + this.y*v.y;
+};
+
+function Ball(x, y, vx, vy) {
+			this.p = new Vector(x, y);
+			this.v = new Vector(vx, vy);
+			this.r = 50;
+		}
+
+		Ball.prototype.draw = function() {
+			context.beginPath();
+			context.lineWidth = 5;
+			context.arc(
+				this.p.x, this.p.y, this.r, 
+				0, 2 * Math.PI, false
+			);
+			context.fill();
+			context.stroke();						
+		};
+
+		Ball.prototype.move = function() {
+			this.p = this.p.sum(this.v);
+		}
+
+		Ball.prototype.bounce = function() {
+			if (this.p.x < this.r || this.p.x > canvas.width - this.r) {
+				this.v.x = -this.v.x;
+			}
+			if (this.p.y < this.r || this.p.y > canvas.height - this.r) {
+				this.v.y = -this.v.y;
+			}
+		}
+
+		Ball.prototype.collide = function(obj) {
+			var dn = new Vector(this.p.x - obj.p.x, this.p.y - obj.p.y);
+			var sr = this.r + obj.r;
+			var dx = dn.length();
+
+			if (dx > sr) {
+				return; // Столкновения нет.
+			}
+
+			dn.normalize();
+			var dt = new Vector(dn.y, -dn.x);
+
+			var v1 = dn.multiply(this.v.dot(dn)).length();
+			var v2 = dn.multiply(obj.v.dot(dn)).length();
+
+			this.v = dt.multiply(this.v.dot(dt));
+			this.v.sum(dn.multiply(v2))
+
+			obj.v = dt.multiply(obj.v.dot(dt));
+			obj.v.sum(dn.multiply(v1));
+		}
+
+		for (var i = 1; i <= circlesCount; i++) {
+			circles.push(new Ball(
+				randomNumber(200, canvas.width - 200),
+				randomNumber(200, canvas.height - 200),
+				randomNumber(1, 5),
+				randomNumber(1, 5)
+			));
+		}
+
+		setInterval(function() {
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < circles.length; i++) {
+				circles[i].bounce();
+
+				// Отслеживаем столкновения.
+				for (var j = 0; j < circles.length; j++) {
+					if (j != i) {
+						circles[i].collide(circles[j]);
+					}
+				}
+
+				circles[i].move();
+				circles[i].draw();
+			}
+		}, 10);
+
+
+
+		
+ </script>
+ </body>
+ </html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas 3</title>
+	<style>
+	canvas {
+		border: 2px solid black;
+	}
+
+	</style>
+</head>
+
+<body>
+	<canvas id="MyCanvas" width="600" height="600"></canvas>
+	<script>
+
+	var canvas = document.getElementById('MyCanvas');
+	var context = canvas.getContext('2d');
+
+	var circles = [];
+	var circlesCount = 5; //кол-ва
+
+	var square = [];
+	var squareCount = 5;
+
+	var randomNumber = function(min,max) {
+		return Math.floor(Math.random() * (max-min) + min);
+
+	} ;
+
+   // функция для квадратов
+	var initSquare = function() {
+		for (var i = 1; i <= squareCount; i++) {
+				var l = randomNumber(10, 50); //что-то с размерами
+				square.push({
+					'l': l,
+					'color': 'red',
+					'x': randomNumber(l + 15, canvas.width - l - 18),
+					'dx': randomNumber(0, 10),
+					'y': randomNumber(l + 15, canvas.height - l - 18),
+					'dy': randomNumber(0, 10),
+					'paint': function() {
+						context.beginPath();
+						context.lineWidth = 5;
+						context.moveTo(this.x, this.y);
+						context.lineTo(this.x+l, this.y);
+						context.lineTo(this.x+l, this.y+l);
+						context.lineTo(this.x, this.y+l);
+						context.lineTo(this.x, this.y);
+						context.closePath();
+						context.strokeStyle = this.color;
+						context.stroke();
+					},
+					'move': function() {
+						if (this.x < 0 || this.x > (canvas.width - this.l)) {
+							this.dx = -this.dx;
+						}
+						if (this.y < 0 || this.y > (canvas.height - this.l)) {
+							this.dy = -this.dy;
+						}
+						this.x += this.dx;
+						this.y += this.dy;
+					}
+				});
+			}
+		};
+
+
+// функция для кругов
+	var initCircles = function() {
+		for (var i = 1; i <= circlesCount; i++) {
+				var r = randomNumber(10, 50);
+				circles.push({
+					'r': r,
+					'color': 'black',
+					'x': randomNumber(r + 15, canvas.width - r - 15),
+					'dx': randomNumber(0, 10),
+					'y': randomNumber(r + 15, canvas.height - r - 15),
+					'dy': randomNumber(0, 10),
+					'paint': function() {
+						context.beginPath();
+						context.lineWidth = 5;
+						context.strokeStyle = this.color;
+						context.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+						context.stroke();
+					},
+					'move': function() {
+						if (this.x < this.r || this.x > (canvas.width - this.r)) {
+							this.dx = -this.dx;
+						}
+						if (this.y < this.r || this.y > (canvas.height - this.r)) {
+							this.dy = -this.dy;
+						}
+						this.x += this.dx;
+						this.y += this.dy;
+					}
+				});
+			}
+		};
+
+
+
+	
+		initSquare(); // ф init возвращает значения(вызывает)
+		initCircles();
+
+		setInterval(function() {
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			for (var i = 0; i < circles.length; i++) {
+				circles[i].move();
+				circles[i].paint();
+				square[i].move();
+				square[i].paint();
+			}
+		}, 30); //скорость
+
+
+
+	</script>
+</body>
+</html>

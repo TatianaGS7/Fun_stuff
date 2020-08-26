@@ -1,0 +1,21 @@
+<h1>Новости</h1>
+<div id="all">
+<% @posts.each do |post| %>
+
+<h3><%= post.name %></h3>
+
+<h4><%= post.title %></h4>
+
+<div id="cont"><%= post.content %></div>
+
+<%= link_to 'Показать', post %>
+<%= link_to 'Изменить', edit_post_path(post) %>
+<%= link_to 'Удалить', post, confirm: 'Вы действительно хотите удалить запись?', method: :delete %>
+
+<% end %>
+
+<br>
+<br>
+
+<%= link_to 'Создать новую запись', new_post_path %>
+</div>
