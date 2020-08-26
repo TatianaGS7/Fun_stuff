@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas</title>
+	  <meta charset="utf-8">
+	<style>
+	body{
+    background: #FFFF99 url(c.png) 100% 0; 
+   	}
+	canvas {
+		border: 5px dashed #660033;
+	}
+
+	</style>
+
+</head>
+<body>
+
+	<center><canvas id="MyCanvas" width="600" height="500"></canvas></center>
+
+	<script>
+	var canvas = document.getElementById('MyCanvas');
+	var context = canvas.getContext('2d');
+
+    //Рисуем букву Т
+	context.beginPath();
+	context.lineWidth = 20;
+	context.strokeStyle = 'rgb(178, 34, 34)';
+	context.lineJoin = 'round'; 
+
+	context.moveTo(100, 200);
+	context.lineTo(100, 300);
+	context.closePath();	
+	context.stroke();
+
+	context.beginPath();
+	context.moveTo(50, 200);
+	context.lineTo(150, 200);
+	context.closePath();	
+	context.stroke();
+
+//Рисуем букву А
+
+	context.beginPath();
+	context.moveTo(190, 260);
+	context.lineTo(230, 260);
+	context.closePath();	
+	context.stroke();
+
+	context.beginPath();
+	context.strokeStyle = 'rgb(255, 165, 0)';
+	context.lineJoin = 'miter';
+
+	context.moveTo(210, 190);
+	context.lineTo(160, 310);
+	context.moveTo(210, 190);
+	context.lineTo(260, 310);
+	context.moveTo(50, 200);
+	context.lineTo(150, 200);
+	context.closePath();
+	context.stroke();
+
+//Рисуем букву Н
+	context.beginPath();
+	context.strokeStyle = 'rgb(154, 205,50)';
+	context.lineJoin = 'bevel';
+	
+	context.moveTo(320, 190);
+	context.lineTo(320, 310);
+	context.moveTo(390, 190);
+	context.lineTo(390, 310);
+	context.closePath();
+	context.stroke();
+
+	 context.beginPath();
+     context.moveTo(510,200);
+     context.quadraticCurveTo(390,200,510,270);
+     //context.quadraticCurveTo(100,150,510,200); 
+     context.stroke();
+
+	//Рисуем букву Я
+	context.beginPath();
+	context.strokeStyle = 'rgb(176, 48, 96)';
+	context.lineJoin = 'round';
+	context.moveTo(320, 250);
+	context.lineTo(390, 250);
+	context.closePath();
+	context.stroke();
+
+	context.beginPath();
+	context.moveTo(510, 200);
+	context.lineTo(510, 310);
+	context.closePath();
+	context.stroke();
+
+	context.beginPath();
+	context.moveTo(500, 260);
+	context.lineTo(450, 310);
+	context.closePath();
+	context.stroke();
+	</script>
+</body>
+</html>
