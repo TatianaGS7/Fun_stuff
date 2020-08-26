@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Тест</title>
+<style>
+   body {
+    background: #f2f0e3; /* Цвет фона веб-страницы */ 
+   }
+   .block {
+    background: url(85tuitu78.png) repeat-y,
+                #FFFF99 url(85tuitu78.png) repeat-y 100% 0; 
+    padding: 10px; /* Поля вокруг текста */
+   }
+     h2 {
+    height: 30px;
+    margin: 0px 100px 10px 100px; 
+    padding:  0px 0px 0px 0px;
+     border: 2px solid; 
+    background: #996699; /* Цвет фона под заголовком */
+    color: #FFCCCC; /* Цвет текста */
+    border-radius: 15px;
+   }
+
+   #t1 {
+    font:  25px Parisian;
+   }
+
+
+   .b1 {
+    background: purple; 
+    color: white; 
+    font-size:  15px;
+   }
+  
+</style>
+</head>
+
+<body>
+
+ <div class="block">
+            <h2><center>Несложный Тест</center></h2>
+         <div id="t1">
+
+
+<script type="text/javascript">
+
+//Массив, в котором содержаться вопросы (всего 4 вопроса)  
+var q=new Array ( 
+ 'Вопрос 1. Вы предпочитаете чай с...?',  'Вопрос 2. Если гости пришли с утра, то Вы...','Вопрос 3.  Начался метеоритный дождь, ваши действия?', 'Вопрос 4. Тест был сложным?');
+//Массив, в котором содержаться ответы. 4 варианта ответа с типом A,B,C,D
+var answer = new Array (
+ 'Лимоном','Молоком','Кипятком','Коньяком','Ужасно рады','Готовы выставить их за дверь при первой же возможности','Любезно предложите присоединиться к утренней трапезе','Прикинетесь мертвым','Загадаете желание','Укроетесь где-нибудь','Будете заворожено смотреть ','Пройдете мимо как ни в чём не бывало','Неимоверно','Ни капельки','Иногда попадались трудные вопросы','Я так и не понял');
+
+
+//Идёт вывод массивов (оформлено в таблице)
+document.writeln ('<form name="f1" action="" method="post">'+
+   '<table width="90%" align="center" border="0" cellpadding="4" cellspacing="0">'
+);
+
+
+ document.writeln ('<tr><td align="center"></td><td>'+q[0]+'</td></tr>');for (var j=0; j<4; j++)
+ document.writeln ('<tr><td align="center"></td><td><input type="radio" name="r1" id = "answer_'+j+'">'+answer[j]+'</td></tr>');
+
+ document.writeln ('<tr><td align="center"></td><td>'+q[1]+'</td></tr>');for (var k=4; k<8; k++)
+ document.writeln ('<tr><td align="center"></td><td> <input type="radio" name="r2" id = "answer_'+k+'" >'+answer[k]+'</td></tr>');
+
+  document.writeln ('<tr><td align="center"></td><td>'+q[2]+'</td></tr>');for (var l=8; l<12; l++)
+ document.writeln ('<tr><td align="center"></td><td><input type="radio" name="r3" id = "answer_'+l+'" >'+answer[l]+'</td></tr>');
+
+  document.writeln ('<tr><td align="center"></td><td>'+q[3]+'</td></tr>');for (var h=12; h<16; h++)
+ document.writeln ('<tr><td align="center"></td><td><input type="radio" name="r4" id = "answer_'+h+'" >'+answer[h]+'</td></tr>');
+
+
+// Вывод результатов происходит с помощью кнопки и функции results()
+document.writeln ('</table><center><input type="button" value="Завершить тест" onclick="results();"><input type="reset" value="Очистить"></center></form>'); 
+
+function results()
+{
+
+  var VA1=0; VB1=0; VC1=0; VD1=0; VA2=0; VB2=0; VC2=0; VD2=0; VA3=0; VB3=0; VC3=0; VD3=0; VA4=0; VB4=0; VC4=0; VD4=0;
+// условия
+  if (answer_0.checked) VC1=25; 
+  if (answer_1.checked) VB1=25;
+  if (answer_2.checked) VA1=25;
+  if (answer_3.checked) VD1=25;
+
+  if (answer_4.checked) VB2=25;
+  if (answer_5.checked) VC2=25;
+  if (answer_6.checked) VD2=25;
+  if (answer_7.checked) VA2=25;
+
+  if (answer_8.checked) VD3=25;
+  if (answer_9.checked) VC3=25;
+  if (answer_10.checked) VA3=25;
+  if (answer_11.checked) VB3=25;
+
+  if (answer_12.checked) VB4=25;
+  if (answer_13.checked) VA4=25;
+  if (answer_14.checked) VD4=25;
+  if (answer_15.checked) VC4=25;
+
+
+  var VA = VA1 + VA2 + VA3 + VA4;
+  var VB = VB1 + VB2 + VB3 + VB4;
+  var VC = VC1 + VC2 + VC3 + VC4;
+  var VD = VD1 + VD2 + VD3 + VD4;
+
+  alert('Результаты тестирования: вопросов типа A выбрано '+VA+'%,  типа B - '+VB+'%, С - '+VC+'%, D - '+VD+'%');
+}
+
+
+   </script>
+
+       </div>
+    </div>
+
+ </body>
+</html>
